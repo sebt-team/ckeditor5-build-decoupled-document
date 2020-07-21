@@ -1,0 +1,17 @@
+/* placeholder/theme/placeholder.css */
+
+.dynamicVariables {
+    background: #ffff00;
+    padding: 4px 2px;
+    outline-offset: -2px;
+    line-height: 1em;
+    margin: 0 1px;
+}
+
+.dynamicVariables::selection {
+    display: none;
+}
+
+.tippy-box, .tippy-tooltip, .tippy-backdrop {
+    font: normal normal normal var(--ck-font-size-base)/var(--ck-line-height-base) var(--ck-font-face) !important;
+}
