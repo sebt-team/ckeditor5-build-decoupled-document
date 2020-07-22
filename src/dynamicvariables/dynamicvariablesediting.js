@@ -44,7 +44,7 @@ export default class DynamicVariablesEditing extends Plugin {
             isObject: true,
 
             // The dynamicVariables can have many types, like date, name, surname, etc:
-            allowAttributes: [ 'name', 'dynamicVariablesText' ]
+            allowAttributes: [ 'name', 'placeholder' ]
         } );
     }
 
@@ -54,12 +54,13 @@ export default class DynamicVariablesEditing extends Plugin {
         conversion.for( 'upcast' ).elementToElement( {
             view: {
                 name: 'span',
-                classes: [ 'dynamicVariables' ]
+                classes: [ 'dynamic-variables' ]
             },
             model: ( viewElement, modelWriter ) => {
                 // Extract the "name" from "{name}".
-                const name = viewElement.getChild( 0 ).data.slice( 1, -1 );
-                return modelWriter.createElement( 'dynamicVariables', { name } );
+                const name = viewElement.getChild( 0 ).parent._attrs.get("placeholder-type")
+                const placeholder = viewElement.getChild( 0 ).parent._attrs.get("placeholder")
+                return modelWriter.createElement( 'dynamicVariables', { name, placeholder: placeholder, }  );
             }
         } );
 
@@ -81,11 +82,11 @@ export default class DynamicVariablesEditing extends Plugin {
         // Helper method for both downcast converters.
         function createDynamicVariablesView( modelItem, viewWriter ) {
             const name = modelItem.getAttribute( 'name' );
-            const dynamicVariablesText = modelItem.getAttribute( 'dynamicVariablesText' );
+            const placeholder = modelItem.getAttribute( 'placeholder' );
 
             const dynamicVariablesView = viewWriter.createContainerElement( 'span', {
                 class: 'dynamic-variables dynamic-variables-tooltip',
-                "placeholder": dynamicVariablesText,
+                "placeholder": placeholder,
                 "placeholder-type": name,
                 id: "elm-" + Math.random().toString(36).substr(2,5)
             });
@@ -97,9 +98,8 @@ export default class DynamicVariablesEditing extends Plugin {
             // const tooltipView = viewWriter.createContainerElement( 'span', { 
             //     class: 'tooltiptext'
             // });
-
-            // if(dynamicVariablesText && dynamicVariablesText != '') {
-            //     const innerTooltipText = viewWriter.createText( dynamicVariablesText );
+            // if(placeholder && placeholder != '') {
+            //     const innerTooltipText = viewWriter.createText( placeholder );
             //     viewWriter.insert( viewWriter.createPositionAt( tooltipView, 1 ), innerTooltipText );
             //     viewWriter.insert( viewWriter.createPositionAt( dynamicVariablesView, 1 ), tooltipView);
             // }

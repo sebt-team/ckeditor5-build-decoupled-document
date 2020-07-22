@@ -3,13 +3,13 @@ import Command from '@ckeditor/ckeditor5-core/src/command';
 export default class DynamicVariablesCommand extends Command {
     execute( { value } ) {
 
-        const dynamicVariablesText = prompt( 'Insert dynamicVariables' );
+        const placeholder = prompt( 'Insert Variable' );
 
         const editor = this.editor;
 
         editor.model.change( writer => {
             // Create a <dynamicVariables> elment with the "name" attribute...
-            const dynamicVariables = writer.createElement( 'dynamicVariables', { name: value, dynamicVariablesText: dynamicVariablesText } );
+            const dynamicVariables = writer.createElement( 'dynamicVariables', { name: value, placeholder: placeholder } );
 
             // ... and insert it into the document.
             editor.model.insertContent( dynamicVariables );

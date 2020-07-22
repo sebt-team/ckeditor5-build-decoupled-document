@@ -18,7 +18,6 @@ export default class DynamicVariablesrUI extends Plugin {
 
         view.addObserver( ClickObserver );
 
-        let commandParam = null;
         let toolTipList = []
 
         // draw elemen on ui
@@ -70,7 +69,7 @@ export default class DynamicVariablesrUI extends Plugin {
 
             // Execute the command when the dropdown item is clicked (executed).
             this.listenTo( dropdownView, 'execute', evt => {
-                commandParam = evt.source.commandParam;
+                let commandParam = evt.source.commandParam;
                 buildUi(evt.source.commandParam);
             } );
 
@@ -83,10 +82,29 @@ export default class DynamicVariablesrUI extends Plugin {
             
             if (modelElement) {
                 if ( modelElement.name == 'dynamicVariables' ) {
+                    let commandParam = modelElement._attrs.get("name")
                     buildUi(commandParam);
                 }
             }
         } );
+
+        debugger;
+
+        editor.on('change', function(evt) { 
+            let elementList = editor.editing.view.getDomRoot().getElementsByClassName('dynamic-variables')
+            setTimeout(()=> {
+                for (let viewElement of elementList) {
+                    let idElement = viewElement.getAttribute("id");
+                    let placeholderTextElement = viewElement.getAttribute("placeholder");
+
+                    let toolTip = tippy(`#${idElement}`, {
+                        content: placeholderTextElement
+                    });
+
+                    toolTipList.push(toolTip[0]);
+                }
+            }, 1000);
+        }); 
     }
 }
 

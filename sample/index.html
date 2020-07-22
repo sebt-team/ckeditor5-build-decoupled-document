@@ -50,12 +50,7 @@
 
 <script src="../build/ckeditor.js"></script>
 <script>
-	const editorData = `<h2>Sample</h2>
-		<p>This is an instance of the <a href="https://ckeditor.com/docs/ckeditor5/latest/builds/guides/overview.html#document-editor">document editor build</a>.</p>
-		<figure class="image">
-			<img src="../tests/manual/sample.jpg" alt="Autumn fields" />
-		</figure>
-		<p>You can use this sample to validate whether your <a href="https://ckeditor.com/docs/ckeditor5/latest/builds/guides/development/custom-builds.html">custom build</a> works fine.</p>`;
+	const editorData = `<p>Esta es una&nbsp;<span class="dynamic-variables dynamic-variables-tooltip" placeholder="Prueba mortal!!" placeholder-type="text" id="elm-lbbhk">{text}</span>&nbsp;prueba <span style="background-color:hsl(0, 75%, 60%);color:hsl(0, 0%, 100%);">muy</span> &nbsp;<strong>importante</strong></p><div class="page-break" style="page-break-after:always;"><span style="display:none;">&nbsp;</span></div><p>&nbsp;</p><p>&nbsp;</p>`;
 
 	DecoupledEditor.create( editorData )
 		.then( editor => {
