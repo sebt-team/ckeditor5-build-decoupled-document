@@ -26,8 +26,10 @@ export default class DynamicVariablesrUI extends Plugin {
             editor.execute( 'dynamicVariables', { value: value } );
             editor.editing.view.focus();
 
+
+            debugger;
             // set tippy tooltip
-            let viewElement = editor.editing.view.getDomRoot().getElementsByClassName('ck-widget')[0];
+            let viewElement = editor.editing.view.getDomRoot().getElementsByClassName('ck-widget_selected')[0];
             let idElement = viewElement.getAttribute("id");
             let placeholderTextElement = viewElement.getAttribute("placeholder");
             
@@ -78,9 +80,11 @@ export default class DynamicVariablesrUI extends Plugin {
 
         editor.listenTo( viewDocument, 'click', ( evt, data ) => {
             const modelElement = editor.editing.mapper.toModelElement( data.target);
-        
-            if ( modelElement.name == 'dynamicVariables' ) {
-                buildUi(commandParam);
+            
+            if (modelElement) {
+                if ( modelElement.name == 'dynamicVariables' ) {
+                    buildUi(commandParam);
+                }
             }
         } );
     }

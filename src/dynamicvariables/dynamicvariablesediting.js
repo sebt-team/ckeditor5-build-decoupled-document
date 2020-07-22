@@ -23,7 +23,7 @@ export default class DynamicVariablesEditing extends Plugin {
 
         this.editor.editing.mapper.on(
             'viewToModelPosition',
-            viewToModelPositionOutsideModelElement( this.editor.model, viewElement => viewElement.hasClass( 'dynamicVariables' ) )
+            viewToModelPositionOutsideModelElement( this.editor.model, viewElement => viewElement.hasClass( 'dynamic-variables' ) )
         );
         this.editor.config.define( 'dynamicVariablesConfig', {
             types: [ 'date', 'first name', 'surname' ]
@@ -84,8 +84,9 @@ export default class DynamicVariablesEditing extends Plugin {
             const dynamicVariablesText = modelItem.getAttribute( 'dynamicVariablesText' );
 
             const dynamicVariablesView = viewWriter.createContainerElement( 'span', {
-                class: 'dynamicVariables tooltip',
-                "placeholder": dynamicVariablesText, 
+                class: 'dynamic-variables dynamic-variables-tooltip',
+                "placeholder": dynamicVariablesText,
+                "placeholder-type": name,
                 id: "elm-" + Math.random().toString(36).substr(2,5)
             });
 

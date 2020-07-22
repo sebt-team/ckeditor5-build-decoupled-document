@@ -39,7 +39,10 @@ import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
 import PageBreak from '@ckeditor/ckeditor5-page-break/src/pagebreak';
 
-import DynamicVariables from '../dynamicvariables/dynamicvariables';
+import DynamicVariables from './dynamicvariables/dynamicvariables';
+
+// for development use (use with ./node_modules/.bin/webpack --mode development -w)
+// import CKEditorInspector from '@ckeditor/ckeditor5-inspector';
 
 export default class DecoupledEditor extends DecoupledEditorBase {}
 
